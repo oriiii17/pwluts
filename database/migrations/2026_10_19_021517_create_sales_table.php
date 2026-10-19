@@ -10,12 +10,17 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-    {
-        Schema::create('sales', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
-    }
+{
+    Schema::create('sales', function (Blueprint $table) {
+        $table->id('purchase_number'); 
+        $table->date('date_of_purchase');
+        
+        $table->foreignId('customer_id')->constrained('customers', 'customer_id')->onDelete('cascade');
+        $table->foreignId('item_code')->constrained('items', 'item_code')->onDelete('cascade');
+        
+        $table->timestamps();
+    });
+}
 
     /**
      * Reverse the migrations.
